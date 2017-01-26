@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
-        if(argc<2){
+        if(argc<2 || argc>3){
             printf("usage:\n  deauth <options> dst_mac_ap [src_mac_station] \n");
             return 0;
         }
