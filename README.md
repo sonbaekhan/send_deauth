@@ -1,4 +1,4 @@
 # send_deauth
 usage:
-  deauth <options> [dst_mac_ap] [src_mac_station] 
+  send_deauth <interface> <dst_ap_mac> [<src_station_mac>] 
   
